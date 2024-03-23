@@ -59,8 +59,12 @@ public class RegistrationTests extends TestBase{
 
         $("#submit").click();
 
-        $$("tr").get(1).shouldHave(text("Jimmy Recard"));
-        $$("tr").get(2).shouldHave(text("JimmyRecard@good.boy"));
+
+        registrationPage.checkResult("Student Name","Jimmy Recard")
+                .checkResult("Student Email","JimmyRecard@good.boy");
+
+        //$$("tr").get(1).shouldHave(text("Jimmy Recard"));
+        //$$("tr").get(2).shouldHave(text("JimmyRecard@good.boy"));
         $$("tr").get(3).shouldHave(text("Male"));
         $$("tr").get(4).shouldHave(text("9997775533"));
         $$("tr").get(5).shouldHave(text("12 June,2000"));
