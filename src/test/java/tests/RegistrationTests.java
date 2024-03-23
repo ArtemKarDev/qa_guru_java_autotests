@@ -8,23 +8,20 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTests extends TestBase{
-    RegistrationPage RegistrationPage = new RegistrationPage();
-
-//public class FirstAutotestDemoqa {
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void successfulRegistrationTests() {
-        open("/automation-practice-form");
-        executeJavaScript("$('#fixban').remove()");
-        executeJavaScript("$('footer').remove()");
-        // BIO
-        new RegistrationPage().setFirstName("Jimmy");
 
-        $(firstPageLocator).setValue("Jimmy");
-        $("#lastName").setValue("Recard");
-        $("#userEmail").setValue("JimmyRecard@good.boy");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("9997775533");
+        registrationPage.openPage()
+                .setFirstName("Jimmy")
+                .setLastName("Recard")
+                .setEmail("JimmyRecard@good.boy")
+                .setGender("Male")
+                .setPhone("9997775533")
+                .setDateOfBirth("30","Juli","2000");
+
+
 
         // Date
         $("#dateOfBirthInput").click();
