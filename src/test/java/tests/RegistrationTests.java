@@ -19,61 +19,53 @@ public class RegistrationTests extends TestBase{
                 .setEmail("JimmyRecard@good.boy")
                 .setGender("Male")
                 .setPhone("9997775533")
-                .setDateOfBirth("30","Juli","2008");
-
-
-
-        // Date
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").click();
-        $("[value='2010']").click();
-        // это для того что бы в списке появилась "2000" при следующем клике
-        $(".react-datepicker__year-select").click();
-        $("[value='2000']").click();
-        $(".react-datepicker__month-select").click();
-        $("[value='5']").click();
-        $("[aria-label='Choose Monday, June 12th, 2000']").click();
-
-        // Subject
-        $("input#subjectsInput").setValue("co");
-        $(byText("Computer Science")).click();
-
-        // Hobbies
-        $("[for=hobbies-checkbox-3]").click();
-
-        //loading pict
-
-        $("#uploadPicture").uploadFromClasspath("pict.jpg");
-
-        //Address
-        $("#currentAddress").setValue("Some street 1");
-
-        //State
-        $("#state").scrollTo();
-        $("#state").click();
-        $(byText("NCR")).click();
-
-        //City
-        $("#city").click();
-        $(byText("Noida")).click();
-
-        $("#submit").click();
-
+                .setDateOfBirth("30","July","2008")
+                .setSubjects("Computer Science")
+                .setHobbies("Music")
+                .setPicture("images/img.jpg")
+                .setAddress("Some street 1")
+                .setState("NCR")
+                .setCity("Noida")
+                .submitClick();
 
         registrationPage.checkResult("Student Name","Jimmy Recard")
-                .checkResult("Student Email","JimmyRecard@good.boy");
-        //.checkResult(,"Male")
+                .checkResult("Student Email","JimmyRecard@good.boy")
+                .checkResult("Gender","Male")
+                .checkResult("Mobile","9997775533")
+                .checkResult("Date of Birth","30 July,2008")
+                .checkResult("Subjects","Computer Science")
+                .checkResult("Hobbies","Music")
+                .checkResult("Picture","img.jpg")
+                .checkResult("Address","Some street 1")
+                .checkResult("State and City","NCR Noida");
+    }
 
-        //$$("tr").get(1).shouldHave(text("Jimmy Recard"));
-        //$$("tr").get(2).shouldHave(text("JimmyRecard@good.boy"));
-        $$("tr").get(3).shouldHave(text("Male"));
-        $$("tr").get(4).shouldHave(text("9997775533"));
-        $$("tr").get(5).shouldHave(text("12 June,2000"));
-        $$("tr").get(6).shouldHave(text("Computer Science"));
-        $$("tr").get(7).shouldHave(text("Music"));
-        $$("tr").get(8).shouldHave(text("pict.jpg"));
-        $$("tr").get(9).shouldHave(text("Some street 1"));
-        $$("tr").get(10).shouldHave(text("NCR Noida"));
+    @Test
+    void notFullDataRegistrationTest(){
+        registrationPage.openPage()
+                .setFirstName("Jimmy")
+                .setLastName("Recard")
+                .setGender("Male")
+                .setPhone("9997775533")
+                .submitClick();
+
+        registrationPage.checkResult("Student Name","Jimmy Recard")
+                .checkResult("Student Email"," ")
+                .checkResult("Gender","Male")
+                .checkResult("Mobile","9997775533")
+                .checkResult("Date of Birth"," ")
+                .checkResult("Subjects"," ")
+                .checkResult("Address"," ");
 
     }
+
+    @Test
+    void notFillRequiredFields(){
+            registrationPage.openPage()
+                            .submitClick()
+                            .checkModalFormNotDisplayed()
+                            .checkEmptyFirstNameAfterSubmited();
+    }
+
 }
+
