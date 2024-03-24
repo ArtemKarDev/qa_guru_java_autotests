@@ -60,7 +60,7 @@ public class RegistrationTests extends TestBase{
     }
 
     @Test
-    void notFillRequiredFields(){
+    void notFillRequiredFieldsTest(){
             registrationPage.openPage()
                             .submitClick()
                             .checkModalFormNotDisplayed()
