@@ -13,7 +13,7 @@ public class RegistrationTests extends TestBase{
     @Test
     void successfulRegistrationTests() {
 
-        registrationPage.openPage()
+        registrationPage.openPracticeFormPage()
                 .setFirstName("Jimmy")
                 .setLastName("Recard")
                 .setEmail("JimmyRecard@good.boy")
@@ -42,7 +42,7 @@ public class RegistrationTests extends TestBase{
 
     @Test
     void notFullDataRegistrationTest(){
-        registrationPage.openPage()
+        registrationPage.openPracticeFormPage()
                 .setFirstName("Jimmy")
                 .setLastName("Recard")
                 .setGender("Male")
@@ -61,7 +61,7 @@ public class RegistrationTests extends TestBase{
 
     @Test
     void notFillRequiredFieldsTest(){
-            registrationPage.openPage()
+            registrationPage.openPracticeFormPage()
                             .submitClick()
                             .checkModalFormNotDisplayed()
                             .checkEmptyFirstNameAfterSubmited();

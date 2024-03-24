@@ -31,7 +31,7 @@ public class RegistrationPage {
     ModalFormComponent modalFormComponent = new ModalFormComponent();
 
 
-    public RegistrationPage openPage() {
+    public RegistrationPage openPracticeFormPage() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -39,6 +39,8 @@ public class RegistrationPage {
 
         return this;
     }
+
+
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.sendKeys(value);
