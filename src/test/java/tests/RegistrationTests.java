@@ -19,7 +19,7 @@ public class RegistrationTests extends TestBase{
                 .setEmail("JimmyRecard@good.boy")
                 .setGender("Male")
                 .setPhone("9997775533")
-                .setDateOfBirth("30","Juli","2000");
+                .setDateOfBirth("30","Juli","2008");
 
 
 
@@ -62,6 +62,7 @@ public class RegistrationTests extends TestBase{
 
         registrationPage.checkResult("Student Name","Jimmy Recard")
                 .checkResult("Student Email","JimmyRecard@good.boy");
+        //.checkResult(,"Male")
 
         //$$("tr").get(1).shouldHave(text("Jimmy Recard"));
         //$$("tr").get(2).shouldHave(text("JimmyRecard@good.boy"));
