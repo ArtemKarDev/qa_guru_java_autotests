@@ -9,17 +9,18 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class TestBase {
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUpConfig() {
         Configuration.browserSize = "1920x1080";
         Configuration.browser = "Chrome";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = false;
-        //Configuration.timeout = 5000; // default 4000
+        //пожалуйста, позвольте оставить эту строчку , хоть в каком нибудь виде
+        //Configuration.holdBrowserOpen = true;
+
     }
 
     @AfterEach
-    void beforeEach(){
+    void closeUp(){
         closeWebDriver();
     }
 }
