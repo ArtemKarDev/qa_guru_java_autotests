@@ -5,18 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
 
+
     public static void main(String[] args) {
-        System.out.println(getRandomGender());
-    }
-
-    public static String getRandomGender(){
-
-        String[] GENDER = {"Male", "Female"};
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(GENDER.length);
-        String randomGender = GENDER[randomIndex];
-        return randomGender;
 
     }
 
@@ -25,6 +15,12 @@ public class RandomUtils {
     }
     public static String getRandomPhone(){
         return String.format("%s"+"%s"+"%s",getRandomInt(901,999),getRandomInt(901,999),getRandomInt(1111,9999));
+    }
+
+    public static String getRandomItem(String[] array) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(array.length);
+        return array[randomIndex];
     }
 
 

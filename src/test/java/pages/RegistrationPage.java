@@ -11,6 +11,19 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
+    public String[] GENDER = {"Male", "Female", "Other"};
+    public String[] SUBJECTS = {"Physics", "Chemistry","Math","Computer Science", "Commerce", "Economics"};
+    public String[] HOBBIES = {"Sports", "Reading", "Music"};
+    public String[] STATES = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
+    public String[][] CITIES = {
+            {"Delhi", "Gurgaon", "Noida"},
+            {"Agra", "Lucknow", "Merrut"},
+            {"Karnal", "Panipat"},
+            {"Jaipur", "Jaiselmer"}
+            };
+
+
+
     private SelenideElement firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
