@@ -7,7 +7,6 @@ import pages.components.CalendarComponent;
 import utils.RandomUtils;
 
 import java.util.Locale;
-import java.util.Random;
 
 public class RegistrationTests extends TestBase{
     RegistrationPage registrationPage = new RegistrationPage();
