@@ -7,7 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
 
-    public String[] hobbies = {"Sports", "Reading", "Music"};
     public String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
     public String[][] cities = {
             {"Delhi", "Gurgaon", "Noida"},
@@ -26,7 +25,7 @@ public class RandomUtils {
         String[] month = {"May","June","July","October"};
         return faker.options().option(month);
     }
-    public String getRandomSubjetc(){
+    public String getRandomSubject(){
         String[] subjects = {"Physics", "Chemistry","Math","Computer Science", "Commerce", "Economics"};
         return faker.options().option(subjects);
     }

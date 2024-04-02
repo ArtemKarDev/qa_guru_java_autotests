@@ -21,7 +21,7 @@ public class RegistrationTests extends TestBase{
     String day = Integer.toString(RandomUtils.getRandomInt(1,30));
     String month = randomUtils.getRandomMonth();
     String year = Integer.toString(RandomUtils.getRandomInt(2000,2010));
-    String subject = randomUtils.getRandomSubjetc();
+    String subject = randomUtils.getRandomSubject();
     String hobbies = randomUtils.getRandomHobbies();
     int stateIndex = RandomUtils.getRandomInt(0,randomUtils.states.length);
     String state = randomUtils.states[stateIndex];
