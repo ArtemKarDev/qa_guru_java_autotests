@@ -25,7 +25,7 @@ public class RegistrationPage {
             cityInput = $("#city"),
             stateCityWrapper = $("#stateCity-wrapper"),
 
-            submitButton = $("#submit");
+    submitButton = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
     ModalFormComponent modalFormComponent = new ModalFormComponent();
@@ -41,93 +41,98 @@ public class RegistrationPage {
     }
 
 
-
     public RegistrationPage setFirstName(String value) {
         firstNameInput.sendKeys(value);
         return this;
     }
+
     public RegistrationPage setLastName(String value) {
         lastNameInput.sendKeys(value);
         return this;
     }
+
     public RegistrationPage setEmail(String value) {
         emailInput.sendKeys(value);
         return this;
     }
+
     public RegistrationPage setGender(String value) {
         genderWrapper.$(byText(value)).click();
         return this;
     }
+
     public RegistrationPage setPhone(String value) {
         phoneInput.sendKeys(value);
         return this;
     }
 
-    public RegistrationPage setDateOfBirth(String day,String month, String year) {
+    public RegistrationPage setDateOfBirth(String day, String month, String year) {
         calendarInput.click();
-        calendarComponent.setDate(day,month,year);
+        calendarComponent.setDate(day, month, year);
 
         return this;
     }
 
-    public RegistrationPage setSubjects(String value){
+    public RegistrationPage setSubjects(String value) {
         subjectsInput.setValue(value).pressEnter();
 
         return this;
     }
 
-    public RegistrationPage setHobbies(String value){
+    public RegistrationPage setHobbies(String value) {
         hobbiesWrapper.$(byText(value)).click();
 
         return this;
     }
 
-    public RegistrationPage setPicture(String value){
+    public RegistrationPage setPicture(String value) {
         pictureInput.uploadFromClasspath(value);
 
         return this;
     }
 
-    public RegistrationPage setAddress(String value){
+    public RegistrationPage setAddress(String value) {
         addressInput.setValue(value);
 
         return this;
     }
-    public RegistrationPage setState(String value){
+
+    public RegistrationPage setState(String value) {
         stateInput.click();
         stateCityWrapper.$(byText(value)).click();
 
         return this;
     }
 
-    public RegistrationPage setCity(String value){
+    public RegistrationPage setCity(String value) {
         cityInput.click();
         stateCityWrapper.$(byText(value)).click();
 
         return this;
     }
 
-    public RegistrationPage submitClick(){
+    public RegistrationPage submitClick() {
         submitButton.click();
         return this;
     }
 
-    public RegistrationPage checkResult(String key, String value){
+    public RegistrationPage checkResult(String key, String value) {
         modalFormComponent.checkModalForm(key, value);
 
         return this;
     }
-    public RegistrationPage checkModalFormNotDisplayed(){
+
+    public RegistrationPage checkModalFormNotDisplayed() {
         modalFormComponent.checkModalFormNotAppear();
 
         return this;
     }
 
-    public RegistrationPage checkEmptyFirstNameAfterSubmited(){
+    public RegistrationPage checkEmptyFirstNameAfterSubmited() {
         firstNameInput.shouldBe(empty);
-        firstNameInput.shouldHave(cssValue("border-color","rgb(220, 53, 69)"));
+        firstNameInput.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
 
-        return  this;
+        return this;
     }
 
 }
