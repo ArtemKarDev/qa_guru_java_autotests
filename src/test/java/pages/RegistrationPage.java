@@ -1,8 +1,12 @@
 package pages;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.ElementsCollection;
 import pages.components.CalendarComponent;
 import pages.components.ModalFormComponent;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -11,7 +15,8 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-    private final SelenideElement firstNameInput = $("#firstName"),
+    private final SelenideElement
+            firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
             genderWrapper = $("#genterWrapper"),
@@ -24,8 +29,10 @@ public class RegistrationPage {
             stateInput = $("#state"),
             cityInput = $("#city"),
             stateCityWrapper = $("#stateCity-wrapper"),
+            submitButton = $("#submit");
 
-    submitButton = $("#submit");
+    private final ElementsCollection
+            headerText = $$(".header-text");
 
     CalendarComponent calendarComponent = new CalendarComponent();
     ModalFormComponent modalFormComponent = new ModalFormComponent();
@@ -40,7 +47,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage closeBannersOnPage(){
+    public RegistrationPage closeBannersOnPage() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
@@ -141,4 +148,10 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage checkHeaderText(List<String> listStrings) {
+        headerText.shouldHave(CollectionCondition.texts(listStrings));
+        System.out.println(headerText.toString());
+        System.out.println(listStrings + " !");
+        return this;
+    }
 }

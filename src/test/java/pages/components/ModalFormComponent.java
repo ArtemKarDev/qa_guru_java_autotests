@@ -4,8 +4,9 @@ import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+
 public class ModalFormComponent {
-    public void checkModalForm(String key, String value){
+    public void checkModalForm(String key, String value) {
 
         $(".modal-dialog").shouldBe(appear);
 
@@ -14,7 +15,7 @@ public class ModalFormComponent {
                 .shouldHave(text(value));
     }
 
-    public void checkModalFormNotAppear(){
+    public void checkModalFormNotAppear() {
         $(".modal-dialog").shouldNotBe(appear);
     }
 

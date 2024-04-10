@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.*;
 import pages.RegistrationPage;
 import utils.RandomUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -124,23 +126,33 @@ public class RegistrationTests extends TestBase {
     }
 
 
-    static Stream<Arguments> notFullDataRegistrationTestWithMethodSource(){
+    static Stream<Arguments> headerTextOnPage() {
         return Stream.of(
-                Arguments.of(),
-                Arguments.of()
+                Arguments.of(
+                        List.of("Elements", "Forms", "Alerts, Frame & Windows", "Widgets", "Interactions", "Book Store Application")
+                )
         );
     }
 
-
-    @MethodSource Source(value = {
-            "Alex | Hoff | 9357483948",
-            "Bulba | Zerg |9652345234"
-    }, delimiter = '|')
-    @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
+    @MethodSource
+    @ParameterizedTest(name = "На странице должны быть заголовки {0}")
     @Tag("regress")
-    void notFullDataRegistrationTestWithMethodSource(List<String> ) {
+    void headerTextOnPage(List<String> expectedText) {
         registrationPage.openPracticeFormPage()
+                .closeBannersOnPage()
+                .checkHeaderText(expectedText);
+    }
 
+    @CsvFileSource(resources = "/test_data/notFullDataRegistrationTest3.csv", delimiter = '|')
+    @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
+        //@Tag("regress")
+    void notFullDataRegistrationTestWithCsvFileSource(String firstName, String lastName, String userNumber) {
+        registrationPage.openPracticeFormPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(userGender)
+                .setPhone(userNumber)
+                .submitClick();
 
         registrationPage.checkResult("Student Name", firstName + ' ' + lastName)
                 .checkResult("Student Email", " ")
@@ -149,29 +161,6 @@ public class RegistrationTests extends TestBase {
                 .checkResult("Date of Birth", " ")
                 .checkResult("Subjects", " ")
                 .checkResult("Address", " ");
-
-    }
-
-
-
-@CsvFileSource(resources = "/test_data/notFullDataRegistrationTest3.csv", delimiter = '|')
-@ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
-@Tag("regress")
-void notFullDataRegistrationTestWithCsvFileSource(String firstName, String lastName, String userNumber) {
-    registrationPage.openPracticeFormPage()
-            .setFirstName(firstName)
-            .setLastName(lastName)
-            .setGender(userGender)
-            .setPhone(userNumber)
-            .submitClick();
-
-    registrationPage.checkResult("Student Name", firstName + ' ' + lastName)
-            .checkResult("Student Email", " ")
-            .checkResult("Gender", userGender)
-            .checkResult("Mobile", userNumber)
-            .checkResult("Date of Birth", " ")
-            .checkResult("Subjects", " ")
-            .checkResult("Address", " ");
 
     }
 }

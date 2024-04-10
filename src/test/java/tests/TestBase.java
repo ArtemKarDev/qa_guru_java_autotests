@@ -19,7 +19,7 @@ public class TestBase {
     }
 
     @AfterEach
-    void closeUp(){
+    void closeUp() {
         closeWebDriver();
     }
 }
