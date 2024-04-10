@@ -6,13 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 import pages.RegistrationPage;
 import utils.RandomUtils;
 
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class RegistrationTests extends TestBase {
 
@@ -43,6 +42,7 @@ public class RegistrationTests extends TestBase {
     void successfulRegistrationTests() {
 
         registrationPage.openPracticeFormPage()
+                .closeBannersOnPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(userEmail)
@@ -72,6 +72,7 @@ public class RegistrationTests extends TestBase {
     @Test
     void notFullDataRegistrationTest() {
         registrationPage.openPracticeFormPage()
+                .closeBannersOnPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setGender(userGender)
@@ -91,6 +92,7 @@ public class RegistrationTests extends TestBase {
     @Test
     void notFillRequiredFieldsTest() {
         registrationPage.openPracticeFormPage()
+                .closeBannersOnPage()
                 .submitClick()
                 .checkModalFormNotDisplayed()
                 .checkEmptyFirstNameAfterSubmited();
@@ -103,7 +105,7 @@ public class RegistrationTests extends TestBase {
     })
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
     @Tag("regress")
-    void notFullDataRegistrationTest1(String userNumber) {
+    void notFullDataRegistrationTestWithValueSource(String userNumber) {
         registrationPage.openPracticeFormPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -121,19 +123,24 @@ public class RegistrationTests extends TestBase {
 
     }
 
-    @CsvSource(value = {
+
+    static Stream<Arguments> notFullDataRegistrationTestWithMethodSource(){
+        return Stream.of(
+                Arguments.of(),
+                Arguments.of()
+        );
+    }
+
+
+    @MethodSource Source(value = {
             "Alex | Hoff | 9357483948",
             "Bulba | Zerg |9652345234"
     }, delimiter = '|')
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
     @Tag("regress")
-    void notFullDataRegistrationTest2(String firstName, String lastName, String userNumber) {
+    void notFullDataRegistrationTestWithMethodSource(List<String> ) {
         registrationPage.openPracticeFormPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(userGender)
-                .setPhone(userNumber)
-                .submitClick();
+
 
         registrationPage.checkResult("Student Name", firstName + ' ' + lastName)
                 .checkResult("Student Email", " ")
@@ -150,7 +157,7 @@ public class RegistrationTests extends TestBase {
 @CsvFileSource(resources = "/test_data/notFullDataRegistrationTest3.csv", delimiter = '|')
 @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
 @Tag("regress")
-void notFullDataRegistrationTest3(String firstName, String lastName, String userNumber) {
+void notFullDataRegistrationTestWithCsvFileSource(String firstName, String lastName, String userNumber) {
     registrationPage.openPracticeFormPage()
             .setFirstName(firstName)
             .setLastName(lastName)

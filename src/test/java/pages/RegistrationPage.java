@@ -33,13 +33,19 @@ public class RegistrationPage {
 
     public RegistrationPage openPracticeFormPage() {
         open("/automation-practice-form");
-        executeJavaScript("$('#fixban').remove()");
-        executeJavaScript("$('footer').remove()");
+        //executeJavaScript("$('#fixban').remove()");
+        //executeJavaScript("$('footer').remove()");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
         return this;
     }
 
+    public RegistrationPage closeBannersOnPage(){
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+
+        return this;
+    }
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.sendKeys(value);
