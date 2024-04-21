@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 
+import helpers.Attach;
 import io.qameta.allure.internal.shadowed.jackson.databind.cfg.ConfigFeature;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -27,5 +28,10 @@ public class TestBase {
     @AfterEach
     void closeUp() {
         closeWebDriver();
+    }
+
+    @AfterEach
+    void addAttachments(){
+        Attach.screenshotAs("Last screenshot");
     }
 }
