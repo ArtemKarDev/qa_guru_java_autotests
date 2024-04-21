@@ -1,9 +1,14 @@
 plugins {
     id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 repositories {
     mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
 }
 
 dependencies {
@@ -12,8 +17,22 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:5.10.0",
             'org.slf4j:slf4j-simple:2.0.7',
             'com.github.javafaker:javafaker:1.0.2',
-
+            'io.qameta.allure:allure-selenide:2.27.0'
     )
+}
+
+allure {
+    report {
+        version.set("2.17.3") //версия Allure Report (https://github.com/allure-framework/allure2)
+    }
+    adapter {
+        aspectjWeaver.set(true) // обработка аннотации @Step
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.17.3") //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
+            }
+        }
+    }
 }
 
 test {
@@ -46,20 +65,21 @@ tasks.register('regress', Test) {
     }
 }
 
-tasks.withType(Test) {
-    useJUnitPlatform ()
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 
     testLogging {
         lifecycle {
-            events "started","passed", "skipped", "failed", "standardOut", "standardError"
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
             exceptionFormat "short"
         }
     }
 }
 
-task demoqa_test(type: Test) {
+tasks.register('demoqa_test', Test) {
     useJUnitPlatform {
         includeTags("demoqa")
+        excludeTags("regress")
     }
 
 }
