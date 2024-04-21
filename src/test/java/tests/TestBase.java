@@ -15,7 +15,7 @@ public class TestBase {
         //Configuration.browser = "Chrome";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         //пожалуйста, позвольте оставить эту строчку , хоть в каком нибудь виде
         //Configuration.holdBrowserOpen = true;
     }
