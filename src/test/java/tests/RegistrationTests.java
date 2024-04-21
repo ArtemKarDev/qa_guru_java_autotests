@@ -72,6 +72,7 @@ public class RegistrationTests extends TestBase {
     }
 
     @Test
+    @Tag("demoqa")
     void notFullDataRegistrationTest() {
         registrationPage.openPracticeFormPage()
                 .closeBannersOnPage()
@@ -107,6 +108,7 @@ public class RegistrationTests extends TestBase {
     })
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
     @Tag("regress")
+    @Tag("demoqa")
     void notFullDataRegistrationTestWithValueSource(String userNumber) {
         registrationPage.openPracticeFormPage()
                 .setFirstName(firstName)
@@ -137,6 +139,7 @@ public class RegistrationTests extends TestBase {
     @MethodSource
     @ParameterizedTest(name = "На странице должны быть заголовки {0}")
     @Tag("regress")
+    @Tag("demoqa")
     void headerTextOnPage(List<String> expectedText) {
         registrationPage.openPracticeFormPage()
                 .closeBannersOnPage()
@@ -146,6 +149,7 @@ public class RegistrationTests extends TestBase {
     @CsvFileSource(resources = "/test_data/notFullDataRegistrationTest3.csv", delimiter = '|')
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
         //@Tag("regress")
+    @Tag("demoqa")
     void notFullDataRegistrationTestWithCsvFileSource(String firstName, String lastName, String userNumber) {
         registrationPage.openPracticeFormPage()
                 .setFirstName(firstName)

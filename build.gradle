@@ -11,7 +11,8 @@ dependencies {
             "com.codeborne:selenide:6.19.1",
             "org.junit.jupiter:junit-jupiter:5.10.0",
             'org.slf4j:slf4j-simple:2.0.7',
-            'com.github.javafaker:javafaker:1.0.2'
+            'com.github.javafaker:javafaker:1.0.2',
+
     )
 }
 
@@ -43,4 +44,22 @@ tasks.register('regress', Test) {
     useJUnitPlatform {
         includeTags("regress")
     }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform ()
+
+    testLogging {
+        lifecycle {
+            events "started","passed", "skipped", "failed", "standardOut", "standardError"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task demoqa_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("demoqa")
+    }
+
 }
