@@ -52,6 +52,7 @@ tasks.register('smoke', Test) {
     useJUnitPlatform {
         includeTags("smoke")
     }
+    systemProperties(System.getProperties())
 }
 
 // Задача для запуска тестов с тегом "regress"
@@ -63,6 +64,7 @@ tasks.register('regress', Test) {
     useJUnitPlatform {
         includeTags("regress")
     }
+    systemProperties(System.getProperties())
 }
 
 tasks.withType(Test).configureEach {
@@ -84,5 +86,5 @@ tasks.register('demoqa_test', Test) {
         includeTags("demoqa")
         excludeTags("regress")
     }
-
+    systemProperties(System.getProperties())
 }
