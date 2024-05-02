@@ -102,13 +102,14 @@ public class RegistrationTests extends TestBase {
     }
 
 
-    @Disabled("jira-BUG777")
+    //@Disabled("jira-BUG777")
     @ValueSource(strings = {
             "9470945066", "9836547077", "9357483948"
     })
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
     @Tag("regress")
     @Tag("demoqa")
+    @Tag("smoke")
     void notFullDataRegistrationTestWithValueSource(String userNumber) {
         registrationPage.openPracticeFormPage()
                 .setFirstName(firstName)
