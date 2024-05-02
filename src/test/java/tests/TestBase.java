@@ -16,13 +16,25 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
+
+
+
+
     @BeforeAll
     static void setUpConfig() {
-        Configuration.browserSize = "1920x1080";
-        //Configuration.browser = "Chrome";
+
+        String browser = System.getProperty("browser", "chrome");
+        String version = System.getProperty("version", "101");
+        String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
+        String windowSize = System.getProperty("windowSize", "1920x1080");
+
+        Configuration.browser = browser;
+        Configuration.browserVersion = version;
+        Configuration.browserSize = windowSize;
+        Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         //пожалуйста, позвольте оставить эту строчку , хоть в каком нибудь виде
         //Configuration.holdBrowserOpen = true;
