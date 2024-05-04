@@ -46,7 +46,7 @@ public class RegistrationTests extends TestBase {
     @Severity(SeverityLevel.BLOCKER)
 
     @Test
-    @Tag("SMOKE")
+    @Tag("smoke")
     void successfulRegistrationTests() {
 
         registrationPage.openPracticeFormPage()
@@ -76,7 +76,7 @@ public class RegistrationTests extends TestBase {
                 .checkResult("Address", streetAddress)
                 .checkResult("State and City", state + " " + city);
     }
-
+    @DisplayName("Заполнение регистрационными данными только обязательных полей")
     @Test
     @Tag("demoqa")
     void notFullDataRegistrationTest() {
@@ -98,6 +98,7 @@ public class RegistrationTests extends TestBase {
 
     }
 
+    @DisplayName("Не заполнение полей")
     @Test
     void notFillRequiredFieldsTest() {
         registrationPage.openPracticeFormPage()
