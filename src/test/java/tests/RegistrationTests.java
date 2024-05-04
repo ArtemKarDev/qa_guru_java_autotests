@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -39,6 +40,11 @@ public class RegistrationTests extends TestBase {
     String streetAddress = faker.address().streetAddress();
 
     @DisplayName("Заполнение регистрационными данными всех полей")
+    @Feature("Форма регистрации")
+    @Story("Заполнение формы")
+    @Owner("KarlashovArtem")
+    @Severity(SeverityLevel.BLOCKER)
+
     @Test
     @Tag("SMOKE")
     void successfulRegistrationTests() {
@@ -106,7 +112,8 @@ public class RegistrationTests extends TestBase {
     @ValueSource(strings = {
             "9470945066", "9836547077", "9357483948"
     })
-    @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
+    @DisplayName("Заполнение регистрационными данными только обязательных полей.")
+    @ParameterizedTest(name = " Для номера телефона {0} данные формой принимаются")
     @Tag("regress")
     @Tag("demoqa")
     @Tag("smoke")
@@ -136,9 +143,9 @@ public class RegistrationTests extends TestBase {
                 )
         );
     }
-
+    @DisplayName("Проверка заголовков.")
     @MethodSource
-    @ParameterizedTest(name = "На странице должны быть заголовки {0}")
+    @ParameterizedTest(name = " На странице должны быть заголовки {0}")
     @Tag("regress")
     @Tag("demoqa")
     void headerTextOnPage(List<String> expectedText) {
@@ -147,6 +154,7 @@ public class RegistrationTests extends TestBase {
                 .checkHeaderText(expectedText);
     }
 
+    @DisplayName("Заполнение регистрационными данными только обязательных полей. Данные из CSV. ")
     @CsvFileSource(resources = "/test_data/notFullDataRegistrationTest3.csv", delimiter = '|')
     @ParameterizedTest(name = "Для номера телефона {0} данные формой принимаются")
         //@Tag("regress")
