@@ -16,10 +16,6 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-
-
-
-
     @BeforeAll
     static void setUpConfig() {
 
@@ -36,8 +32,7 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        //пожалуйста, позвольте оставить эту строчку , хоть в каком нибудь виде
-        //Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(

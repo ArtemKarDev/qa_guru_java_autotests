@@ -44,7 +44,6 @@ public class RegistrationTests extends TestBase {
     @Story("Заполнение формы")
     @Owner("KarlashovArtem")
     @Severity(SeverityLevel.BLOCKER)
-
     @Test
     @Tag("smoke")
     void successfulRegistrationTests() {
