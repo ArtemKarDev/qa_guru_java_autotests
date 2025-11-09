@@ -30,15 +30,17 @@ dependencies {
     )
 }
 
+def allureVersion = "2.27.0"
+
 allure {
     report {
-        version.set("2.27.0") //версия Allure Report (https://github.com/allure-framework/allure2)
+        version.set(allureVersion) //версия Allure Report (https://github.com/allure-framework/allure2)
     }
     adapter {
         aspectjWeaver.set(true) // обработка аннотации @Step
         frameworks {
             junit5 {
-                adapterVersion.set("2.27.0") //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
+                adapterVersion.set(allureVersion) //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
             }
         }
     }
