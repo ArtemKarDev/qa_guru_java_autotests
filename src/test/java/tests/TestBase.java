@@ -19,29 +19,50 @@ public class TestBase {
     @BeforeAll
     static void setUpConfig() {
 
-        String browser = System.getProperty("browser", "chrome");
-        String version = System.getProperty("version", "142");
-        String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
-        String windowSize = System.getProperty("windowSize", "1920x1080");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("version", "latest");
+        //String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
+        Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
 
-        Configuration.browser = browser;
-        Configuration.browserVersion = version;
-        Configuration.browserSize = windowSize;
+        Configuration.holdBrowserOpen = false;
         Configuration.headless = true;
-        Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
+        //Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        Configuration.holdBrowserOpen = false;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
+        boolean isJenkins = System.getenv("JENKINS_HOME") != null;
 
-        Configuration.browserCapabilities = capabilities;
+        if (isJenkins) {
+            String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
+            Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
+            Configuration.headless = true;
+
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            Configuration.browserCapabilities = capabilities;
+
+            System.out.println("=== Running on Jenkins with Selenoid ===");
+        } else {
+            // 👉 Локальный запуск — без remote, только headless Chrome
+            Configuration.headless = true;
+            Configuration.remote = null;
+            System.out.println("=== Running locally (headless Chrome) ===");
+        }
+
+
+
+
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("selenoid:options", Map.of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+//        Configuration.browserCapabilities = capabilities;
     }
 
     @AfterEach
