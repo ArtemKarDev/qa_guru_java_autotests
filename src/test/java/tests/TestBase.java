@@ -20,7 +20,7 @@ public class TestBase {
     static void setUpConfig() {
 
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("version", "latest");
+        Configuration.browserVersion = System.getProperty("version", "113");
         //String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
         Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
 
@@ -36,7 +36,8 @@ public class TestBase {
 
         if (isJenkins) {
             String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
-            Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
+//            Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
+            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
             Configuration.headless = true;
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
