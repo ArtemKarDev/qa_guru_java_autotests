@@ -20,13 +20,14 @@ public class TestBase {
     static void setUpConfig() {
 
         String browser = System.getProperty("browser", "chrome");
-        String version = System.getProperty("version", "101");
+        String version = System.getProperty("version", "142");
         String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
         String windowSize = System.getProperty("windowSize", "1920x1080");
 
         Configuration.browser = browser;
         Configuration.browserVersion = version;
         Configuration.browserSize = windowSize;
+        Configuration.headless = true;
         Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
@@ -53,7 +54,6 @@ public class TestBase {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-
         Attach.addVideo();
     }
 }
