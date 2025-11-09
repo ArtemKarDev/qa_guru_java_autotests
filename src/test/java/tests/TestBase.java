@@ -20,7 +20,7 @@ public class TestBase {
     static void setUpConfig() {
 
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("version", "113");
+        Configuration.browserVersion = System.getProperty("version", "127.0");
         //String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
         Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
 
