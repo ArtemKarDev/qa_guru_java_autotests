@@ -21,12 +21,10 @@ public class TestBase {
 
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("version", "127.0");
-        //String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
         Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
 
         Configuration.holdBrowserOpen = false;
         Configuration.headless = true;
-        //Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
@@ -36,7 +34,6 @@ public class TestBase {
 
         if (isJenkins) {
             String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
-//            Configuration.remote = "https://user1:1234@" + wdHost + "/wd/hub";
             Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
             Configuration.headless = true;
 
@@ -49,21 +46,11 @@ public class TestBase {
 
             System.out.println("=== Running on Jenkins with Selenoid ===");
         } else {
-            // 👉 Локальный запуск — без remote, только headless Chrome
             Configuration.headless = true;
             Configuration.remote = null;
             System.out.println("=== Running locally (headless Chrome) ===");
         }
 
-
-
-
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("selenoid:options", Map.of(
-//                "enableVNC", true,
-//                "enableVideo", true
-//        ));
-//        Configuration.browserCapabilities = capabilities;
     }
 
     @AfterEach
