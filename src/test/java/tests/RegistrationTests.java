@@ -134,6 +134,7 @@ public class RegistrationTests extends TestBase {
                 .checkResult("Address", " ");
 
     }
+    // gradle clean smoke -Dbrowser=opera -Dversion=101 -DbrowserSize=400x500
 
 
     static Stream<Arguments> headerTextOnPage() {
