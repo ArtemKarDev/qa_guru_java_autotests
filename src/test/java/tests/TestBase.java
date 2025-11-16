@@ -33,8 +33,8 @@ public class TestBase {
         boolean isJenkins = System.getenv("JENKINS_HOME") != null;
 
         if (isJenkins) {
-            //String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
-            Configuration.remote = System.getProperty("remote","https://user1:1234@selenoid.autotests.cloud/wd/hub");
+            String wdHost = System.getProperty("wdHost", "selenoid.autotests.cloud");
+            Configuration.remote = System.getProperty("remote","https://user1:1234@"+wdHost+"/wd/hub");
             Configuration.headless = true;
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
