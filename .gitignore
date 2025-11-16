@@ -1,5 +1,6 @@
 HELP.md
 build/
+notificsations/
 !**/src/main/**
 !**/src/test/**
 
